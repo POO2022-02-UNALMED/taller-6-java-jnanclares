@@ -10,7 +10,7 @@ import static vehiculos.Vehiculo.fabricantes;
 public class Fabricante {
     private String nombre;
     private Pais pais;
-    public static Map<String,Integer> contador_fabricantes = new HashMap<String, Integer>();
+    public static Map<Fabricante,Integer> contador_fabricantes = new HashMap<Fabricante, Integer>();
 
 
     public Fabricante(String nombre, Pais pais) {
@@ -34,10 +34,10 @@ public class Fabricante {
         this.pais = pais;
     }
 
-    public static String fabricaMayorVentas(){
+    public static Fabricante fabricaMayorVentas(){
         for (Fabricante value : fabricantes) {
-            Integer count = contador_fabricantes.get(value.getNombre());
-            contador_fabricantes.put(value.getNombre(), count == null ? 1 : count + 1);
+            Integer count = contador_fabricantes.get(value);
+            contador_fabricantes.put(value, count == null ? 1 : count + 1);
         }
         return Collections.max(contador_fabricantes.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
